@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Logic {
   public void demoLoop() {
@@ -107,4 +109,97 @@ public class Logic {
     }
     input.close();
   }
+  // Game đoán số
+      public void guessNumber() {
+        Random r = new Random();
+        int number = r.nextInt(100);
+    
+        Scanner input = new Scanner(System.in);
+        while (true) {
+          System.out.println("Hãy đoán số hoặc gõ 'q' để thoát");
+          String str = input.nextLine();
+          if (str.equals("q")) {
+            break;
+          } else {
+            int guessNumber = Integer.parseInt(str);
+            if (guessNumber > number){
+              System.out.println("Số bạn nhập vào lớn hơn");
+            } else if (guessNumber < number) {
+              System.out.println("Số bạn nhập vào nhỏ hơn");
+            } else {
+              System.out.println("Bạn đã đoán đúng số " + number);
+            }
+          }
+        }
+        input.close();
+      }
+
+      // Kiểm tra sức khỏe
+      public void guessBMI(){
+        Scanner input = new Scanner(System.in);
+        while (true) {
+          System.out.println("Nhập chiều cao của bạn hoặc nhấn q để thoát :");
+          float height = input.nextLine();
+          System.out.println("Nhập cân nặng của bạn :");
+          float weight = input.nextLine();
+          float BMI = weight / (height * height);
+          if (height == q){
+            break;
+          }else{
+            if( BMI < 18.5){
+              System.out.println("Bạn đang nhẹ cân ,cần ăn uống khoa học hơn .");
+            }else if( BMI > 18.5 && BMI < 24.9){
+              System.out.println("Bạn đang có thân hình chuẩn , cố giữu nhé .");
+            }else if ( BMI > 24.9 && BMI < 29.9){
+              System.out.println("Bạn đang thừa cân ,cần ăn uống khoa học hơn .");
+            }else if ( BMI > 29.9){
+              System.out.println("Bạn đang quá béo ,hãy ăn ít lại và tập thể dục .");
+            }
+
+          }
+        }
+        input.close();
+      }
+
+      //Kiểm tra email của người dùng nhập vào
+      public void checkemail(){
+        String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+            + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";// cấu trúc 1 email thông thường
+        while (true) {
+          Scanner input = new Scanner(System.in);
+          System.out.println("Mời bạn nhập email hoặc x để thoát :");
+          String email = input.nextLine();
+          if( email.equals("x") ){
+            break;
+          }else if(Patter.matches(EMAIL_PATTERN , email) == true ){
+            System.out.println(" email chuẩn .");
+            break;
+          }else{
+            System.out.println(" email sai định dạng .");
+            break;
+          }
+        }
+        input.close();
+      }
+
+      // Nhập vào một số nguyên dương < 100, hãy in ra chuỗi các số nguyên tố. Số nguyên tố là số chỉ chia hết cho 1 và chính nó.
+      public void soNguyenTo(){
+        boolean soNguyenTo = false;
+        Scanner input = new Scanner(System.in);
+        System.out.println("Số bạn muốn nhập là :");
+        int a = input.nextInt();
+        // 1 2 là số nguyên tố mặc nhiên ta ko cần xét 
+        System.out.println("1 2")
+        // bắt đàu xét từ 3
+        for( i = 3 ; i < a ; i++){
+          soNguyenTo = true;
+          for( j = 2 ; j < i ; j++){
+            if( i % j == 0 )
+            soNguyenTo = false;
+          }
+          if( soNguyenTo == true)
+            System.out.println( i + "");
+        }
+        
+      }
 }
